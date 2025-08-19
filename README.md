@@ -25,8 +25,6 @@ Manual configuration involves reviewing the following files so that they match y
 
   * **openid_connect_configuration.conf** - this contains the primary configuration for one or more IdPs in `map{}` blocks
     * Modify all of the `map…$oidc_` blocks to match your IdP configuration
-    * Modify the URI defined in `map…$oidc_logout_redirect` to specify an unprotected resource to be displayed after requesting the `/logout` location
-    * Set a unique value for `$oidc_hmac_key` to ensure nonce values are unpredictable
     * If NGINX Plus is deployed behind another proxy or load balancer, modify the `map…$redirect_base` and `map…$proto` blocks to define how to obtain the original protocol and port number.
 
   * **frontend.conf** - this is the reverse proxy configuration
@@ -38,6 +36,4 @@ Manual configuration involves reviewing the following files so that they match y
     * Modify the `resolver` directive to match a DNS server that is capable of resolving the IdP defined in `$oidc_token_endpoint` and `$oidc_end_session_endpoint`
     * If using [`auth_jwt_key_request`](http://nginx.org/en/docs/http/ngx_http_auth_jwt_module.html#auth_jwt_key_request) to automatically fetch the JWK file from the IdP then modify the validity period and other caching options to suit your IdP
 
-  * **openid_connect.js** - this is the JavaScript code for performing the authorization code exchange and nonce hashing
-    * No changes are required unless modifying the code exchange or validation process
 
